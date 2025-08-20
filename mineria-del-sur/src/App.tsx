@@ -1,14 +1,13 @@
+// src/App.tsx
 import Header from "./components/Header";
 
-function App() {
+export default function App() {
   return (
-    <div>
-      
+    <>
       <Header />
-      <main className="p-6">
+      <main id="contenido" className="pt-20">
+        {/* tus rutas / secciones */}
       </main>
-    </div>
+    </>
   );
 }
-
-export default App;

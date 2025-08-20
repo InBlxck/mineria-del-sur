@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* tus colores custom */
+:root {
+  --coal:  #172B37;
+  --copper:#B37863;
+  --gold:  #D4AF37;
+  --sand:  #ED670D;
+  --dust:  #96A0AF;
+  --white: #FFFFFF;
+  --Body: #1f2d38;
+}
+
+body {
+  background: var(--Body);
+  color: var(--white);
+}
