@@ -1,4 +1,3 @@
-import HolaMundo from "./components/holamundo";
 import Header from "./components/Header";
 
 function App() {
@@ -7,7 +6,6 @@ function App() {
       
       <Header />
       <main className="p-6">
-        <HolaMundo />
       </main>
     </div>
   );
