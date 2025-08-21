@@ -4,16 +4,131 @@
 
 /* tus colores custom */
 :root {
-  --coal:  #172B37;
-  --copper:#B37863;
-  --gold:  #D4AF37;
-  --sand:  #ED670D;
-  --dust:  #96A0AF;
+  --coal:  #172B37;  /* azul */
+  --copper:#B37863;  /* cobre */
+  --gold:  #D4AF37;  /* dorado */
+  --sand:  #E9E1D0;  /* arena (corregido) */
+  --dust:  #96A0AF;  /* gris */
   --white: #FFFFFF;
-  --Body: #1f2d38;
+  --Body:  #1f2d38;  /* fondo general actual (si quieres claro: usa var(--sand)) */
 }
 
 body {
   background: var(--Body);
   color: var(--white);
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+/*hero*/
+/* --- Sección principal con difuminaciones --- */
+.hero{
+  position: relative;
+  min-height: 86vh;
+  display: grid;
+  place-items: center;
+  color: var(--sand);
+  overflow: hidden;
+  isolation: isolate;
+  padding: 56px 16px;
+
+  /* Gradiente principal + “manchas” dorado/cobre/arena */
+  background:
+    radial-gradient(900px 360px at 75% 15%, rgba(212,175,55,.12), transparent 60%),
+    radial-gradient(800px 300px at 25% 30%, rgba(184,115,51,.10), transparent 65%),
+    radial-gradient(1000px 380px at 50% 90%, rgba(237,231,221,.06), transparent 70%),
+    linear-gradient(180deg, #0f1c2a 0%, var(--coal) 55%);
+}
+
+/* Viñeta superior sutil */
+.hero::after{
+  content:"";
+  position:absolute; inset:0;
+  background: radial-gradient(1200px 520px at 50% -20%, rgba(0,0,0,.25), transparent 60%);
+  z-index:-1;
+}
+
+/* Fondo montañoso */
+.hero::before{
+  content:"";
+  position:absolute; left:0; right:0; bottom:0;
+  height: 65%;
+  z-index:-1;
+  background:
+    url("data:image/svg+xml;utf8,\
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 600' preserveAspectRatio='none'>\
+  <defs>\
+    <linearGradient id='sky' x1='0' y1='0' x2='0' y2='1'>\
+      <stop offset='0%' stop-color='%23121b27'/>\
+      <stop offset='100%' stop-color='%230b131b'/>\
+    </linearGradient>\
+  </defs>\
+  <rect width='1600' height='600' fill='url(%23sky)'/>\
+  <!-- Capa montaña más lejana -->\
+  <path d='M0 400 L200 300 L400 360 L600 280 L800 340 L1000 270 L1200 330 L1400 290 L1600 360 V600 H0 Z' fill='%23182838'/>\
+  <!-- Capa montaña intermedia -->\
+  <path d='M0 420 L250 320 L500 380 L750 300 L1000 370 L1250 320 L1500 380 L1600 350 V600 H0 Z' fill='%231b2a34'/>\
+  <!-- Capa montaña cercana -->\
+  <path d='M0 460 L220 360 L440 420 L660 340 L880 410 L1100 360 L1320 420 L1600 380 V600 H0 Z' fill='%231d313d'/>\
+  <!-- Suelo base -->\
+  <rect y='500' width='1600' height='100' fill='%230e1721'/>\
+</svg>") bottom center/cover no-repeat;
+  filter: drop-shadow(0 -14px 36px rgba(0,0,0,.32));
+}
+
+/* --- Contenido central (SIN tarjeta) --- */
+.hero-inner{
+  text-align:center;
+  padding: clamp(16px, 4vw, 32px);
+}
+
+/* Títulos y textos más grandes */
+.hero-title{
+  font-size: clamp(3rem, 7vw, 5rem);   /* MÁS GRANDE */
+  font-weight: 900;
+  letter-spacing: .02em;
+  color: var(--gold);
+  margin: 0 0 10px;
+  text-transform: uppercase;
+}
+.hero-sub{
+  color: rgba(255,255,255,.9);
+  font-size: clamp(1.1rem, 2.6vw, 1.6rem);  /* MÁS GRANDE */
+  margin: 0 0 22px;
+}
+
+/* Botones */
+.hero-actions{
+  display: inline-flex; gap: 14px; flex-wrap: wrap; justify-content:center;
+}
+.btn{
+  display: inline-flex; align-items:center; justify-content:center;
+  height: 46px; padding: 0 20px;
+  border-radius: 12px;
+  font-weight: 700; letter-spacing: .01em;
+  text-decoration: none; cursor: pointer; user-select:none;
+  transition: .2s ease;
+}
+.btn-solid{
+  color: var(--sand);
+  background: #0E1B29; /* pill */
+  border: 1px solid rgba(255,255,255,.08);
+  box-shadow: 0 6px 16px rgba(0,0,0,.28);
+}
+.btn-solid:hover{ transform: translateY(-1px); }
+.btn-outline{
+  color: var(--sand);
+  border: 1px solid var(--sand);
+  background: transparent;
+}
+.btn-outline:hover{
+  color: var(--gold);
+  border-color: var(--gold);
 }
