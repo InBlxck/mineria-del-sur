@@ -5,6 +5,7 @@ import StatsStrip from "../components/StatsStrip";
 import NewsGrid from "../components/NewsGrid";
 import BandCTA from "../components/BandCTA";
 import InfoTile from "../components/InfoTile";
+import Section from "../components/Section";
 
 const base = import.meta.env.BASE_URL || "/";
 
@@ -41,13 +42,15 @@ const slides = [
 
 export default function Home() {
   return (
-    <main id="contenido" className="pt-20 px-4 sm:px-6 lg:px-8">
-      {/* Carrusel principal */}
-      <Carousel slides={slides} intervalMs={6000} className="mb-10" />
+    <main id="contenido" className="px-4 sm:px-6 lg:px-8">
+      {/* HERO / CARRUSEL (ocupa todo el ancho, pegado al header) */}
+      <Section container={false} className="pt-0 pb-0 -mt-20">
+        <Carousel slides={slides} intervalMs={6000} />
+      </Section>
 
-      {/* Cuadrados de info (clicables) */}
-      <div className="mx-auto max-w-7xl mb-12">
-        <div className="grid gap-6 md:grid-cols-3">
+      {/* Tiles (muted) */}
+      <Section variant="muted" dividerTop dividerBottom>
+        <div className="grid gap-8 md:grid-cols-3">
           <InfoTile
             to="/servicios"
             eyebrow="Servicios"
@@ -70,11 +73,10 @@ export default function Home() {
             imageSrc={`${base}Images/mina-3.jpg`}
           />
         </div>
-      </div>
+      </Section>
 
-      {/* Contenedor ancho y aireado */}
-      <div className="mx-auto max-w-7xl space-y-14">
-        {/* Sección 1: Operación */}
+      {/* FeatureRow 1 (plain) */}
+      <Section>
         <FeatureRow
           eyebrow="Operación"
           title="Minería a cielo abierto con estándares de clase mundial"
@@ -84,8 +86,10 @@ export default function Home() {
           ctaTo="/servicios#operaciones"
           ctaLabel="Ver operaciones"
         />
+      </Section>
 
-        {/* Sección 2: Planta (alternada) */}
+      {/* FeatureRow 2 (elevated para alternar) */}
+      <Section variant="elevated" dividerTop dividerBottom>
         <FeatureRow
           reverse
           eyebrow="Procesos"
@@ -96,8 +100,10 @@ export default function Home() {
           ctaTo="/servicios#planta"
           ctaLabel="Ver planta"
         />
+      </Section>
 
-        {/* Sección 3: Sustentabilidad */}
+      {/* FeatureRow 3 (plain) */}
+      <Section>
         <FeatureRow
           eyebrow="Sustentabilidad"
           title="Gestión ambiental e integración con comunidades"
@@ -107,8 +113,10 @@ export default function Home() {
           ctaTo="/servicios#sustentabilidad"
           ctaLabel="Ver sustentabilidad"
         />
+      </Section>
 
-        {/* KPIs / Números clave */}
+      {/* KPIs (brand con brillo sutil) */}
+      <Section variant="brand" dividerTop dividerBottom>
         <StatsStrip
           items={[
             { value: "+12", label: "Proyectos ejecutados" },
@@ -117,33 +125,22 @@ export default function Home() {
             { value: "ISO", label: "HSE & Calidad" },
           ]}
         />
+      </Section>
 
-        {/* Noticias / Proyectos (resumen) */}
+      {/* Noticias (muted) */}
+      <Section variant="muted">
         <NewsGrid
           title="Proyectos y novedades"
           items={[
-            {
-              to: "/proyectos",
-              imageSrc: `${base}Images/mina-1.jpg`,
-              title: "Optimización de flota en rajo",
-              desc: "Reducción de tiempos de ciclo y mejora de productividad.",
-            },
-            {
-              to: "/proyectos",
-              imageSrc: `${base}Images/mina-2.jpg`,
-              title: "Gestión hídrica en zonas áridas",
-              desc: "Recirculación y control de consumos en procesos críticos.",
-            },
-            {
-              to: "/proyectos",
-              imageSrc: `${base}Images/mina-3.jpg`,
-              title: "QA/QC de concentrado",
-              desc: "Trazabilidad y cumplimiento de especificaciones.",
-            },
+            { to: "/proyectos", imageSrc: `${base}Images/mina-1.jpg`, title: "Optimización de flota en rajo", desc: "Reducción de tiempos de ciclo y mejora de productividad." },
+            { to: "/proyectos", imageSrc: `${base}Images/mina-2.jpg`, title: "Gestión hídrica en zonas áridas", desc: "Recirculación y control de consumos en procesos críticos." },
+            { to: "/proyectos", imageSrc: `${base}Images/mina-3.jpg`, title: "QA/QC de concentrado", desc: "Trazabilidad y cumplimiento de especificaciones." },
           ]}
         />
+      </Section>
 
-        {/* CTA final */}
+      {/* CTA final (plain) */}
+      <Section>
         <BandCTA
           imageSrc={`${base}Images/mina-2.jpg`}
           title="¿Listo para conversar tu proyecto?"
@@ -151,7 +148,7 @@ export default function Home() {
           to="/contacto"
           button="Conversemos"
         />
-      </div>
+      </Section>
     </main>
   );
 }

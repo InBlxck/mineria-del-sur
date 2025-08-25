@@ -15,9 +15,16 @@ type Props = {
   slides: Slide[];
   intervalMs?: number;
   className?: string;
+  /** margen superior para despegar del header fijo */
+  offsetTopClass?: string; // ej: "mt-8 sm:mt-12"
 };
 
-export default function Carousel({ slides, intervalMs = 6000, className = "" }: Props) {
+export default function Carousel({
+  slides,
+  intervalMs = 6000,
+  className = "",
+  offsetTopClass = "mt-8 sm:mt-12", // espacio reducido
+}: Props) {
   const [index, setIndex] = useState(0);
   const [isHover, setIsHover] = useState(false);
   const [hasFocus, setHasFocus] = useState(true);
@@ -65,7 +72,7 @@ export default function Carousel({ slides, intervalMs = 6000, className = "" }: 
 
   return (
     <div
-      className={`relative overflow-hidden rounded-3xl shadow-xl ${className}`}
+      className={`relative overflow-hidden rounded-3xl shadow-xl ${offsetTopClass} ${className}`}
       onMouseEnter={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}
       onPointerDown={onPointerDown}
@@ -95,9 +102,9 @@ export default function Carousel({ slides, intervalMs = 6000, className = "" }: 
             {/* Gradiente para legibilidad (desde abajo) */}
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-black/25 to-transparent" />
 
-            {/* Texto centrado abajo, por encima de los puntos */}
+            {/* Texto centrado en medio de la foto */}
             {(s.eyebrow || s.title || s.subtitle || s.ctaTo) && (
-              <div className="absolute bottom-16 inset-x-0 flex justify-center px-4 sm:px-8 text-center">
+              <div className="absolute inset-0 flex items-center justify-center px-4 sm:px-8 text-center">
                 <div
                   className="inline-flex max-w-3xl flex-col gap-2 rounded-2xl
                              bg-black/30 backdrop-blur-md px-4 py-3 sm:px-5 sm:py-4
@@ -129,11 +136,10 @@ export default function Carousel({ slides, intervalMs = 6000, className = "" }: 
                         className="inline-flex items-center gap-2 rounded-2xl px-4 py-2
                                    bg-gradient-to-r from-[#B87333] to-[#D4AF37]
                                    text-black font-medium shadow/30 hover:brightness-110 transition"
-                        aria-label={s.ctaLabel || "Ver más"}
                       >
                         {s.ctaLabel || "Ver más"}
                         <svg width="16" height="16" viewBox="0 0 24 24">
-                          <path fill="currentColor" d="M10 17l5-5-5-5v10z"/>
+                          <path fill="currentColor" d="M10 17l5-5-5-5v10z" />
                         </svg>
                       </Link>
                     </div>
